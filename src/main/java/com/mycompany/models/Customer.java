@@ -14,11 +14,6 @@ public class Customer {
 private String fName,sName,email,address,password,securityQ,securityAns;
 private int customerID;
 
-   
-
-
-
-
 
 private int pin;
 
