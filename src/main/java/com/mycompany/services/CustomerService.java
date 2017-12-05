@@ -5,10 +5,37 @@
  */
 package com.mycompany.services;
 
+import com.mycompany.models.Customer;
+import java.util.List;
+
 /**
  *
- * @author x
+ * @author Stephen Kearns
  */
 public class CustomerService {
     
+    public CustomerService(){
+        
+    }
+    
+    public List getCustomers(){
+        return null;
+    }
+    
+    public Customer getCustomer(int id){
+        return null;
+    }
+    
+    public String CreateCustomer(Customer c){
+        return "Created";
+    }
+    
+    public Customer EditCustomer(int custId){
+        
+        return null;
+    }
+    
+    public String DeleteCustomer(int custId){
+        return "Deleted customer" + custId;
+    }
 }
