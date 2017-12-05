@@ -16,14 +16,14 @@ public class Transaction {
     private String transType;
     private int amount;
     private Date date;
-    private int accountID;
+    private int accountNum;
     
     public Transaction(int transID, String transType, int amount, Date date, int accountID) {
         this.transID = transID;
         this.transType = transType;
         this.amount = amount;
         this.date = date;
-        this.accountID = accountID;
+        this.accountNum = accountID;
         
     }
     public int getTransID() {
@@ -58,12 +58,12 @@ public class Transaction {
         this.date = date;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public int getAccountNum() {
+        return accountNum;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public void setAccountNum(int accountNum) {
+        this.accountNum = accountNum;
     }
     
     
