@@ -9,10 +9,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+
 /**
  *
  * @author Stephen
  */
+
 
 @Path("/banking")
 public class BankingService {
@@ -22,5 +24,4 @@ public class BankingService {
     public Response test(){
         return Response.status(Response.Status.OK).entity("Hello Bitch!").build();
     }
-         
 }
