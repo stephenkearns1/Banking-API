@@ -5,12 +5,32 @@
  */
 package com.mycompany.models;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 /**
  *
- * @author barry
+ * @author barry, Stephen
  */
-public class Customer {
 
+@Entity
+@Table
+@XmlRootElement
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlSeeAlso({Account.class})
+
+
+public class Customer implements Serializable {
+
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private int id;
 private String Fname,Sname,email,address,password,securityQ,securityAns;
 private int pin;
 
@@ -90,6 +110,10 @@ private int pin;
         this.pin = pin;
     }
 
+    
+    /*
+      Add OneToMany RelationShip for Accounts 
+    */
 
     
 }

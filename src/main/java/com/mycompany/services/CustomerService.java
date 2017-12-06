@@ -6,6 +6,7 @@
 package com.mycompany.services;
 
 import com.mycompany.models.Customer;
+import com.mycompany.storage.DBPresistance;
 import java.util.List;
 
 /**
@@ -13,9 +14,9 @@ import java.util.List;
  * @author Stephen Kearns
  */
 public class CustomerService {
-    
+    DBPresistance presistance;
     public CustomerService(){
-        
+        presistance = new DBPresistance();
     }
     
     public List getCustomers(){
@@ -27,7 +28,11 @@ public class CustomerService {
     }
     
     public String CreateCustomer(Customer c){
-        return "Created";
+        presistance.Begin();
+        presistance.Presist(c);
+        presistance.Commit();
+        
+        return "Customer Created";
     }
     
     public Customer EditCustomer(int custId){

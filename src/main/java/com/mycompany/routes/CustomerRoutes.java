@@ -6,6 +6,7 @@
 package com.mycompany.routes;
 
 import com.mycompany.models.Customer;
+import com.mycompany.services.CustomerService;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,7 +24,11 @@ import javax.ws.rs.core.Response;
 
 @Path("/customer")
 public class CustomerRoutes {
+    private CustomerService service;
     
+    public CustomerRoutes(){
+        service = new CustomerService();
+    }
     @GET
     @Path("/test")
     public Response test(){
@@ -40,7 +45,8 @@ public class CustomerRoutes {
     @POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createCustomer(Customer c){
-        return null;
+        String response = service.CreateCustomer(c);
+        return Response.status(Response.Status.CREATED).entity(response).build();
     }
     
     @PUT
