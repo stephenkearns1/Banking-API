@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -33,6 +30,12 @@ public class Customer implements Serializable {
 private int id;
 private String Fname,Sname,email,address,password,securityQ,securityAns;
 private int pin;
+
+@OneToMany(targetEntity=Account.class )
+private List<Account> accounts;
+
+    public Customer() {
+    }
 
     public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
         this.Fname = Fname;
@@ -109,11 +112,22 @@ private int pin;
     public void setPin(int pin) {
         this.pin = pin;
     }
+    
+    
 
     
     /*
       Add OneToMany RelationShip for Accounts 
     */
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
     
+    
+  
 }

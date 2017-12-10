@@ -17,7 +17,7 @@
                 <packaging>*</packaging>
             </packagings>
             <goals>
-                <goal>jetty:rub</goal>
+                <goal>install</goal>
             </goals>
         </action>
     </actions>
