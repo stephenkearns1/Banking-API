@@ -42,16 +42,12 @@ public class Account implements Serializable {
    public Account(int sortCode, int accountId, double balance) {
         this.sortCode = sortCode;
         this.accountId = accountId;
-        this.balance = balance;
-    }
 
     public void setSortCode(int sortCode) {
         this.sortCode = sortCode;
     }
-
     public void setAccountNum(int accountId) {
         this.accountId = accountId;
-    }
 
     public void setBalance(double balance) {
         this.balance = balance;

@@ -1,3 +1,4 @@
+
 package com.mycompany.models;
 
 import java.io.Serializable;
@@ -22,7 +23,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlSeeAlso({Account.class})
 
-
 public class Customer implements Serializable {
 
 @Id
@@ -37,9 +37,9 @@ private List<Account> accounts;
     public Customer() {
     }
 
-    public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
-        this.Fname = Fname;
-        this.Sname = Sname;
+    public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin, int customerID) {
+        this.fName = Fname;
+        this.sName = Sname;
         this.email = email;
         this.address = address;
         this.password = password;
@@ -63,6 +63,30 @@ private List<Account> accounts;
 
     public void setSname(String Sname) {
         this.Sname = Sname;
+    }
+
+     public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getsName() {
+        return sName;
+    }
+
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
     public String getEmail() {
@@ -114,8 +138,6 @@ private List<Account> accounts;
     }
     
     
-
-    
     /*
       Add OneToMany RelationShip for Accounts 
     */
@@ -128,6 +150,4 @@ private List<Account> accounts;
         this.accounts = accounts;
     }
     
-    
-  
 }
