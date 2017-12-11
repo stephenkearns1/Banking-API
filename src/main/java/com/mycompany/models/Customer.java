@@ -1,4 +1,3 @@
-
 package com.mycompany.models;
 
 import java.io.Serializable;
@@ -22,13 +21,12 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlRootElement
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlSeeAlso({Account.class})
-
 public class Customer implements Serializable {
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private int cust_id;
-private String Fname,Sname,email,address,password,securityQ,securityAns;
+private String fName,sName,email,address,password,securityQ,securityAns;
 private int pin;
 
 @OneToMany(targetEntity=Account.class )
@@ -37,7 +35,7 @@ private List<Account> accounts;
     public Customer() {
     }
 
-    public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin, int customerID) {
+    public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
         this.fName = Fname;
         this.sName = Sname;
         this.email = email;
@@ -50,27 +48,27 @@ private List<Account> accounts;
 
 
     public String getFname() {
-        return Fname;
+        return fName;
     }
 
     public void setFname(String Fname) {
-        this.Fname = Fname;
+        this.fName = Fname;
     }
 
     public String getSname() {
-        return Sname;
+        return sName;
     }
 
     public void setSname(String Sname) {
-        this.Sname = Sname;
+        this.sName = Sname;
     }
 
      public int getCustomerID() {
-        return customerID;
+        return cust_id;
     }
 
     public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+        this.cust_id = customerID;
     }
 
     public String getfName() {
@@ -137,6 +135,7 @@ private List<Account> accounts;
         this.pin = pin;
     }
     
+
     
     /*
       Add OneToMany RelationShip for Accounts 
@@ -150,4 +149,5 @@ private List<Account> accounts;
         this.accounts = accounts;
     }
     
+  
 }
