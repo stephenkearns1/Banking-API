@@ -27,9 +27,12 @@ public class CustomerService {
     }
     
     public Customer getCustomer(int id){
-        presistance.OpenEntityManagerInstance();
         Customer customer = (Customer) presistance.Find(Customer.class, id);
-        
+        return customer;
+    }
+    
+    public Customer getCustomer(Customer c){
+        Customer customer = (Customer) presistance.Find(Customer.class, c);
         return customer;
     }
     
@@ -51,13 +54,35 @@ public class CustomerService {
        
     }
     
-    public Customer EditCustomer(int custId){
+    public Customer EditCustomer(int custId, Customer c){
+        Customer customer = getCustomer(custId);
+        if(customer != null){
+            presistance.Begin();
+            customer.setAddress(c.getAddress());
+            customer.setEmail(c.getEmail());
+            customer.setFname(c.getFname());
+            customer.setSname(c.getSname());
+            customer.setSecurityQ(c.getSecurityQ());
+            customer.setSecurityAns(c.getSecurityAns());
+            
+            presistance.Commit();
+            presistance.Close();
+        }
         
-        return null;
+        return customer;
     }
     
     public String DeleteCustomer(int custId){
-        return "Deleted customer" + custId;
+        Customer customer = getCustomer(custId);
+        if(customer != null){
+            presistance.Begin();
+            presistance.Remove(customer);
+            presistance.Commit();
+            presistance.Close();
+            return "Deleted customer" + custId;
+        }
+        
+        return "Customer Not Found";
     }
 
     private boolean CustomerAlreadyExists(Customer c) {

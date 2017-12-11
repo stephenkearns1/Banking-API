@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.storage;
 
 import com.mycompany.models.Customer;
@@ -32,6 +27,10 @@ public class DBPresistance {
             emTransaction = entityManager.getTransaction();
         }
     }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
     
     public void Presist(Object obj){
        entityManager.persist(obj);
@@ -45,13 +44,16 @@ public class DBPresistance {
         emTransaction.begin();
     }
     
+    public void Remove(Object obj){
+        entityManager.remove(obj);
+    }
+    
     public void Rollback(){
         emTransaction.rollback();
     } 
     
     public void Close(){
         entityManager.close();
-        emFactory.close();
     }
     
     public Object Find(Class entity, int key){
@@ -62,11 +64,5 @@ public class DBPresistance {
     public Object Find(Class entity, Customer c){
         return entityManager.find(entity, c);
     }
-
-
-    
-    
-    
-    
     
 }
