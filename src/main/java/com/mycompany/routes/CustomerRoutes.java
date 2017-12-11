@@ -5,6 +5,7 @@
  */
 package com.mycompany.routes;
 
+import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.models.Customer;
 import com.mycompany.services.CustomerService;
 import javax.ws.rs.DELETE;
@@ -38,8 +39,13 @@ public class CustomerRoutes {
     @GET
     @Path("/{custId}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response getCustomers(@PathParam("custId") int id){
-        return null;
+    public Customer getCustomer(@PathParam("custId") int id){
+        Customer customer = service.getCustomer(id);
+        if(customer != null){
+            return customer;
+        }
+        else
+           throw new NotFoundException("Customer not Found");
     }
     
     @POST

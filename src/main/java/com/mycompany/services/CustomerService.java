@@ -5,6 +5,7 @@
  */
 package com.mycompany.services;
 
+import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.models.Customer;
 import com.mycompany.storage.DBPresistance;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 /**
  *
  * @author Stephen Kearns
+ * For add account, get the customer first using the customer class then add then account
+ * To the customer and then add the customer to the account 
  */
 public class CustomerService {
     DBPresistance presistance;
@@ -24,19 +27,28 @@ public class CustomerService {
     }
     
     public Customer getCustomer(int id){
-        return null;
+        presistance.OpenEntityManagerInstance();
+        Customer customer = (Customer) presistance.Find(Customer.class, id);
+        
+        return customer;
     }
     
     public String CreateCustomer(Customer c){
-        //Acquire a connection, even tho a new instance will be created on each request 
-        presistance.OpenEntityManagerInstance();
-        presistance.Begin();
-        presistance.Presist(c);
-        presistance.Commit();
-        
-        /* Close the connection unless, pooling is implemented */
-        presistance.Close();
-        return "Customer Created";
+        if(!CustomerAlreadyExists(c)){
+             //Acquire a connection, even tho a new instance will be created on each request 
+             presistance.OpenEntityManagerInstance();
+             presistance.Begin();
+             presistance.Presist(c);
+             presistance.Commit();
+
+             /* Close the connection unless, pooling is implemented */
+             presistance.Close();
+             return "Customer Created";
+        }
+        else{
+            return "Customer already exists";
+        }
+       
     }
     
     public Customer EditCustomer(int custId){
@@ -46,5 +58,15 @@ public class CustomerService {
     
     public String DeleteCustomer(int custId){
         return "Deleted customer" + custId;
+    }
+
+    private boolean CustomerAlreadyExists(Customer c) {
+        boolean exists = false;
+        Customer customer = (Customer) presistance.Find(Customer.class, c);
+        if(customer != null){
+            return exists = true;
+        }
+        
+        return exists;
     }
 }

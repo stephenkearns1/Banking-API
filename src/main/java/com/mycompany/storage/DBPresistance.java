@@ -5,6 +5,7 @@
  */
 package com.mycompany.storage;
 
+import com.mycompany.models.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -52,6 +53,17 @@ public class DBPresistance {
         entityManager.close();
         emFactory.close();
     }
+    
+    public Object Find(Class entity, int key){
+        return entityManager.find(entity, key);
+    }
+    
+      
+    public Object Find(Class entity, Customer c){
+        return entityManager.find(entity, c);
+    }
+
+
     
     
     
