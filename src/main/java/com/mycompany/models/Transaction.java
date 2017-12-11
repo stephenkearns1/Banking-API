@@ -6,24 +6,37 @@
 package com.mycompany.models;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author barry
+ * @author barry, Stephen
  */
+
+@Entity
+@Table
+@XmlRootElement
 public class Transaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int transID;
     private String transType;
     private int amount;
     private Date date;
-    private int accountNum;
+    private int accountID;
+
     
     public Transaction(int transID, String transType, int amount, Date date, int accountID) {
         this.transID = transID;
         this.transType = transType;
         this.amount = amount;
         this.date = date;
-        this.accountNum = accountID;
+        this.accountID = accountID;
         
     }
     public int getTransID() {
@@ -58,15 +71,12 @@ public class Transaction {
         this.date = date;
     }
 
-    public int getAccountNum() {
-        return accountNum;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setAccountNum(int accountNum) {
-        this.accountNum = accountNum;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
-    
-    
-    
-    
+
 }
