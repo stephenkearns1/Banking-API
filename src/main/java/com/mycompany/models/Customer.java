@@ -21,14 +21,12 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlRootElement
 //@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlSeeAlso({Account.class})
-
-
 public class Customer implements Serializable {
 
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private int cust_id;
-private String Fname,Sname,email,address,password,securityQ,securityAns;
+private String fName,sName,email,address,password,securityQ,securityAns;
 private int pin;
 
 @OneToMany(targetEntity=Account.class )
@@ -38,8 +36,8 @@ private List<Account> accounts;
     }
 
     public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
-        this.Fname = Fname;
-        this.Sname = Sname;
+        this.fName = Fname;
+        this.sName = Sname;
         this.email = email;
         this.address = address;
         this.password = password;
@@ -50,19 +48,43 @@ private List<Account> accounts;
 
 
     public String getFname() {
-        return Fname;
+        return fName;
     }
 
     public void setFname(String Fname) {
-        this.Fname = Fname;
+        this.fName = Fname;
     }
 
     public String getSname() {
-        return Sname;
+        return sName;
     }
 
     public void setSname(String Sname) {
-        this.Sname = Sname;
+        this.sName = Sname;
+    }
+
+     public int getCustomerID() {
+        return cust_id;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.cust_id = customerID;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getsName() {
+        return sName;
+    }
+
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
     public String getEmail() {
@@ -113,7 +135,6 @@ private List<Account> accounts;
         this.pin = pin;
     }
     
-    
 
     
     /*
@@ -127,7 +148,6 @@ private List<Account> accounts;
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
-    
     
   
 }

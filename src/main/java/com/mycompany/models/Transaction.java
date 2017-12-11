@@ -29,6 +29,7 @@ public class Transaction {
     private int amount;
     private Date date;
     private int accountID;
+
     
     public Transaction(int transID, String transType, int amount, Date date, int accountID) {
         this.transID = transID;
@@ -77,8 +78,5 @@ public class Transaction {
     public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
-    
-    
-    
-    
+
 }

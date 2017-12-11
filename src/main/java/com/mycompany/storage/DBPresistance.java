@@ -47,7 +47,7 @@ public class DBPresistance {
     public void Remove(Object obj){
         entityManager.remove(obj);
     }
-    
+
     public void Rollback(){
         emTransaction.rollback();
     } 

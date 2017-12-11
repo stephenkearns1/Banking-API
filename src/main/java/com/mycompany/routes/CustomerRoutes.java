@@ -25,6 +25,7 @@ public class CustomerRoutes {
     public CustomerRoutes(){
         service = new CustomerService();
     }
+
     @GET
     @Path("/test")
     public Response test(){

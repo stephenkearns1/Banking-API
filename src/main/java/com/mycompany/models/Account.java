@@ -49,7 +49,7 @@ public class Account implements Serializable {
         this.sortCode = sortCode;
     }
 
-    public void setAccountNum(int accountId) {
+    public void setAccountID(int accountId) {
         this.accountId = accountId;
     }
 
@@ -77,8 +77,4 @@ public class Account implements Serializable {
     public Customer getCustomer(){
         return customer;
     }
-
-    
-   
-    
 }
