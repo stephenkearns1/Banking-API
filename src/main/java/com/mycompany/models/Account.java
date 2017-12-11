@@ -29,10 +29,12 @@ public class Account implements Serializable {
    private int accountId;
    private int sortCode;
    private double balance;
+   
 
    @ManyToOne(fetch=FetchType.EAGER)
    @JoinColumn(name="cust_id")
    private Customer customer;
+   
    public Account() {
    
    }
@@ -68,6 +70,13 @@ public class Account implements Serializable {
         return balance;
     }
    
+    public void setCustomer(Customer c){
+        customer = c;
+    }
+    
+    public Customer getCustomer(){
+        return customer;
+    }
 
     
    

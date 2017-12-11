@@ -20,7 +20,7 @@ public class DBPresistance {
     private EntityTransaction emTransaction;
     
     public DBPresistance(){
-        emFactory = Persistence.createEntityManagerFactory("Bank");
+        emFactory = Persistence.createEntityManagerFactory("bank-connection");
         entityManager = emFactory.createEntityManager();
         emTransaction = entityManager.getTransaction();
     }

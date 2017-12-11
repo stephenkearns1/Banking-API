@@ -6,12 +6,24 @@
 package com.mycompany.models;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author barry
+ * @author barry, Stephen
  */
+
+@Entity
+@Table
+@XmlRootElement
 public class Transaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int transID;
     private String transType;
     private int amount;

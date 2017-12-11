@@ -28,10 +28,14 @@ public class CustomerService {
     }
     
     public String CreateCustomer(Customer c){
+        //Acquire a connection, even tho a new instance will be created on each request 
+        presistance.OpenEntityManagerInstance();
         presistance.Begin();
         presistance.Presist(c);
         presistance.Commit();
         
+        /* Close the connection unless, pooling is implemented */
+        presistance.Close();
         return "Customer Created";
     }
     
