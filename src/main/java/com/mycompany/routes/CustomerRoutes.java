@@ -74,6 +74,7 @@ public class CustomerRoutes {
         if(deleted){
          return Response.status(Response.Status.OK).entity("Customer Deleted").build();
         }
+        
         return Response.status(Response.Status.NOT_FOUND).entity("Not found").build();
     }
     

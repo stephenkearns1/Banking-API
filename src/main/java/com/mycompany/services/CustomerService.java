@@ -72,17 +72,19 @@ public class CustomerService {
         return customer;
     }
     
-    public String DeleteCustomer(int custId){
+    public boolean DeleteCustomer(int custId){
         Customer customer = getCustomer(custId);
+        boolean deleted = false;
         if(customer != null){
             presistance.Begin();
             presistance.Remove(customer);
             presistance.Commit();
             presistance.Close();
-            return "Deleted customer" + custId;
+            deleted = true;
+            return deleted;
         }
         
-        return "Customer Not Found";
+        return deleted;
     }
 
     private boolean CustomerAlreadyExists(Customer c) {
