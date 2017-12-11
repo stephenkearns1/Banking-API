@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/customer")
 public class CustomerRoutes {
-    private CustomerService service;
+    private final CustomerService service;
     
     public CustomerRoutes(){
         service = new CustomerService();
