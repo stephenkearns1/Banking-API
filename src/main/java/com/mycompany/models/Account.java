@@ -6,6 +6,7 @@
 package com.mycompany.models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Account implements Serializable {
    private int sortCode;
    private double balance;
    
-
+   
    @ManyToOne(fetch=FetchType.EAGER)
    @JoinColumn(name="cust_id")
    private Customer customer;
@@ -77,4 +78,6 @@ public class Account implements Serializable {
     public Customer getCustomer(){
         return customer;
     }
+    
+    
 }
