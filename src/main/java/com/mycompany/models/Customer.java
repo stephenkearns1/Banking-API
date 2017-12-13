@@ -28,7 +28,7 @@ public class Customer implements Serializable {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private int cust_id;
-private String Fname,Sname,email,address,password,securityQ,securityAns;
+private String fname,sname,email,address,password,securityQ,securityAns;
 private int pin;
 
 @OneToMany(targetEntity=Account.class )
@@ -38,8 +38,8 @@ private List<Account> accounts;
     }
 
     public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
-        this.Fname = Fname;
-        this.Sname = Sname;
+        this.fname = Fname;
+        this.sname = Sname;
         this.email = email;
         this.address = address;
         this.password = password;
@@ -50,19 +50,19 @@ private List<Account> accounts;
 
 
     public String getFname() {
-        return Fname;
+        return fname;
     }
 
     public void setFname(String Fname) {
-        this.Fname = Fname;
+        this.fname = Fname;
     }
 
     public String getSname() {
-        return Sname;
+        return sname;
     }
 
     public void setSname(String Sname) {
-        this.Sname = Sname;
+        this.sname = Sname;
     }
 
      public int getCustomerID() {

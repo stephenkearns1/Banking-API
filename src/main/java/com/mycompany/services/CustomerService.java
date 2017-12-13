@@ -99,19 +99,24 @@ public class CustomerService {
     */
     
     private boolean CustomerAlreadyExists(Customer c) {
-     boolean exists = false;
-     
-     CriteriaBuilder criteriaBuilder = presistance.GetCriteriaBuilder();
-     CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
-     Root<Customer> from = criteriaQuery.from(Customer.class);
-     criteriaQuery.select(from);
-     criteriaQuery.where(criteriaBuilder.equal(from.get("email"), c.getEmail()));
-     TypedQuery<Customer> typedQuery = presistance.getEntityManager().createQuery(criteriaQuery);
-     try{
-         return exists = true;
-     }catch(NoResultException exc){
-         return exists;
-     }
-     
+        boolean exists = false;
+        
+        
+        try {
+            
+            CriteriaBuilder criteriaBuilder = presistance.GetCriteriaBuilder();
+            CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+            Root<Customer> from = criteriaQuery.from(Customer.class);
+            criteriaQuery.select(from);
+            criteriaQuery.where(criteriaBuilder.equal(from.get("email"), criteriaBuilder.parameter(String.class, "email")));
+            TypedQuery<Customer> typedQuery = presistance.getEntityManager().createQuery(criteriaQuery);
+            typedQuery.setParameter("email", c.getEmail());
+            Customer customer = typedQuery.getSingleResult();
+        }catch(final NoResultException exc) {
+            return exists;
+        }
+        
+        return exists = true;
     }
+   
 }

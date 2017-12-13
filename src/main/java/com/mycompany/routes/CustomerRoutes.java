@@ -47,6 +47,7 @@ public class CustomerRoutes {
     @POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createCustomer(Customer c){
+        System.out.println("FirstName: " + c.getFname() + " SecondName" + c.getSname());
         String response = service.CreateCustomer(c);
         return Response.status(Response.Status.CREATED).entity(response).build();
     }

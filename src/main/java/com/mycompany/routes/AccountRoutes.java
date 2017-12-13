@@ -66,7 +66,7 @@ Path to create an account
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response createAccount(Account a){
        // String response = service.CreateAccount(a);
-        return Response.status(Response.Status.CREATED).entity(response).build();
+        return Response.status(Response.Status.CREATED).entity("Fuck you").build();
     }
     
   /*
