@@ -54,6 +54,7 @@ public class TestRoutes {
             throw new NotFoundException("Account not Found");
         }
     }
+
     
     @GET
 @Path("/balance/{accountId}")
@@ -78,6 +79,7 @@ public Response getBalance(@PathParam("accountId") int id){
         
         return Response.status(Response.Status.NOT_FOUND).entity("Not found").build();
     }   
+
 
 
 
