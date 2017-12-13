@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
@@ -26,7 +28,7 @@ public class Customer implements Serializable {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private int cust_id;
-private String fName,sName,email,address,password,securityQ,securityAns;
+private String Fname,Sname,email,address,password,securityQ,securityAns;
 private int pin;
 
 @OneToMany(targetEntity=Account.class )
@@ -36,8 +38,8 @@ private List<Account> accounts;
     }
 
     public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
-        this.fName = Fname;
-        this.sName = Sname;
+        this.Fname = Fname;
+        this.Sname = Sname;
         this.email = email;
         this.address = address;
         this.password = password;
@@ -48,19 +50,19 @@ private List<Account> accounts;
 
 
     public String getFname() {
-        return fName;
+        return Fname;
     }
 
     public void setFname(String Fname) {
-        this.fName = Fname;
+        this.Fname = Fname;
     }
 
     public String getSname() {
-        return sName;
+        return Sname;
     }
 
     public void setSname(String Sname) {
-        this.sName = Sname;
+        this.Sname = Sname;
     }
 
      public int getCustomerID() {
@@ -69,22 +71,6 @@ private List<Account> accounts;
 
     public void setCustomerID(int customerID) {
         this.cust_id = customerID;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getsName() {
-        return sName;
-    }
-
-    public void setsName(String sName) {
-        this.sName = sName;
     }
 
     public String getEmail() {
@@ -140,7 +126,8 @@ private List<Account> accounts;
     /*
       Add OneToMany RelationShip for Accounts 
     */
-
+    @XmlElementWrapper(name = "accounts")
+    @XmlElementRef()
     public List<Account> getAccounts() {
         return accounts;
     }

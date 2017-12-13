@@ -12,7 +12,8 @@
       <class>com.mycompany.models.Transaction</class>
       
       <properties>
-         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bank"/>
+         <!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bank"/> -->
+         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mytest"/> 
          <property name="javax.persistence.jdbc.user" value="stephen"/>
          <property name="javax.persistence.jdbc.password" value="Password@123"/>
          <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

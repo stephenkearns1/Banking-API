@@ -4,6 +4,11 @@ import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.models.Customer;
 import com.mycompany.storage.DBPresistance;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -38,14 +43,14 @@ public class CustomerService {
              presistance.Begin();
              presistance.Presist(c);
              presistance.Commit();
-
+             
              /* Close the connection unless, pooling is implemented */
              presistance.Close();
              return "Customer Created";
         }
-        else{
-            return "Customer already exists";
-        }
+       else{
+           return "Customer already exists";
+       }
        
     }
     
@@ -81,7 +86,7 @@ public class CustomerService {
         
         return deleted;
     }
-
+    /*
     private boolean CustomerAlreadyExists(Customer c) {
         boolean exists = false;
         Customer customer = (Customer) presistance.Find(Customer.class, c);
@@ -90,5 +95,23 @@ public class CustomerService {
         }
         
         return exists;
+    }
+    */
+    
+    private boolean CustomerAlreadyExists(Customer c) {
+     boolean exists = false;
+     
+     CriteriaBuilder criteriaBuilder = presistance.GetCriteriaBuilder();
+     CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+     Root<Customer> from = criteriaQuery.from(Customer.class);
+     criteriaQuery.select(from);
+     criteriaQuery.where(criteriaBuilder.equal(from.get("email"), c.getEmail()));
+     TypedQuery<Customer> typedQuery = presistance.getEntityManager().createQuery(criteriaQuery);
+     try{
+         return exists = true;
+     }catch(NoResultException exc){
+         return exists;
+     }
+     
     }
 }
