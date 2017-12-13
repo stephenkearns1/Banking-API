@@ -20,6 +20,7 @@ public class AccountService {
          presistance = new DBPresistance();
          } 
   
+     
      public List getAccount(){
         return null;
     }
@@ -29,15 +30,14 @@ public class AccountService {
     This method retrieves the details of a customer's account
     */
     public Account getAccount(int id){
-       Account account = (Account) presistance.Find(Account.class, id);
-       return account;
-    }  
+        Account account = (Account) presistance.Find(Account.class, id);
+        return account;
+    }
     
-    public Account getAccount(Account a){
-     //  Account account = (Account) presistance.Find(Account.class, a);
-      // return account;
-      return null;
-    }    
+    /*public Account getAccount(Account a){
+        Account account = (Account) presistance.(Account.class, a);
+        return account;
+    } */
     
     public String CreateAccount(Account a){
         if(!AccountAlreadyExists(a)){
@@ -61,12 +61,11 @@ public class AccountService {
     This method retrieves the balance of a customer's account
     */
     public Account getBalance(int id){
-        /*IT IS LOOKING FOR accountID in AccountService class - need to find it in Account.java
-        Account a = presistance.find(Account.class, accountId);
+        
+        Account a = (Account) presistance.Find(Account.class, id);
         presistance.Close();
         return a;
-        */
-        return null;
+       
     }
     /*
     This method deletes an account owned by a customer
