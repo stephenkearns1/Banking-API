@@ -16,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import javax.ws.rs.Path;
 
 /**
  *
@@ -61,13 +60,13 @@ public Response getAccount(@PathParam("accountId") int id){
 /*
 Path to create an account
 */
-
 @POST
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response createAccount(Account a){
-       // String response = service.CreateAccount(a);
-        return Response.status(Response.Status.CREATED).entity("Fuck you").build();
-    }
+@Path("{cust_id}")
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+public Response createAccount(@PathParam("cust_id") int cust_id){
+   service.CreateAccount(cust_id);
+   return Response.status(Response.Status.CREATED).entity("Fuck you").build();
+}
     
   /*
 Path to get balance of account
@@ -75,7 +74,7 @@ Path to get balance of account
 
 @GET
 @Path("/{accountId/balance}")
- @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public Response getBalance(@PathParam("accountId") int id){
     Account account = service.getBalance(id);
     if(account != null){
@@ -86,12 +85,12 @@ public Response getBalance(@PathParam("accountId") int id){
 }
 
  /*
-Path to delete an account
-*/ 
+    Path to delete an account
+ */ 
     
  @DELETE
-    @Path("/{accountId}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+ @Path("/{accountId}")
+ @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response deleteAccount(@PathParam("accountId") int id){
         boolean deleted = service.deleteAccount(id);
         if(deleted){

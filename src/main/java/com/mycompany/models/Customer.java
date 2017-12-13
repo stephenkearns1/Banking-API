@@ -136,5 +136,9 @@ private List<Account> accounts;
         this.accounts = accounts;
     }
     
+    public void addAccount(Account acc){
+        accounts.add(acc);
+    }
+    
   
 }
