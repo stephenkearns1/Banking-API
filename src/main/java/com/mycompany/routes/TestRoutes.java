@@ -116,25 +116,26 @@ public Response getBalance(@PathParam("accountId") int id){
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/lodgement/{amount}/{card}")
     public Account Lodgement(
-            @PathParam("amount") int amount,
+            @PathParam("amount") double amount,
             @PathParam("card") String card,
             Account b) {
        List<Account> account = OneAccount(b.getAccountId());
         if (account != null) {
             
-            b = account.set(0.0, b);
-            int balance = b.getBalance();
-            int bal = balance + amount;
+           // b = account.set(0.0, b);
+            double balance = b.getBalance();
+            double bal = balance + amount;
             b.setBalance(bal);
             Date date = new Date();
 
             Transaction tran1 = new Transaction();
+            tran1.setTransID(tran1.getTransID());
             tran1.setType("Credit");
-            tran1.setDate(date);
+            tran1.setCard(card);
             tran1.setDescription("lodgement of " + amount + " to account");
             tran1.setAmount(amount);
             tran1.setnBalance(bal);
-            tran1.setCard(card);
+            tran1.setDate(date);
 
             tr.begin();
             em.persist(tran1);
@@ -156,20 +157,21 @@ public Response getBalance(@PathParam("accountId") int id){
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/withdrawal/{amount}/{card}")
    public Account Withdrawal(
-            @PathParam("amount") int amount,
+            @PathParam("amount") double amount,
             @PathParam("card") String card,
             Account b) {
        
             List<Account> account = OneAccount(b.getAccountId());
             
         if (account != null) {
-           b = account.set(0.0, b);
-            int balance = b.getBalance();
-            int bal = balance - amount;
+          // b = account.set(0.0, b);
+            double balance = b.getBalance();
+            double bal = balance - amount;
             b.setBalance(bal);
             Date date = new Date();
 
             Transaction tran1 = new Transaction();
+            tran1.setTransID(tran1.getTransID());
             tran1.setType("Debit");
             tran1.setDate(date);
             tran1.setDescription("withdrawing: " + amount + "!");
@@ -203,7 +205,7 @@ public Response getBalance(@PathParam("accountId") int id){
             Account b) {
      
        
-            List<Account> account1 = OneAccount(id1);
+            List<Account>account1 = OneAccount(id1);
             List<Account> account2 = OneAccount(id2);
             
         if (account1 != null && account2 != null) {
@@ -214,17 +216,18 @@ public Response getBalance(@PathParam("accountId") int id){
           
            b = account2.set(0, b);
            
-            int balance = a.getBalance();
-            int bal = balance - amount;
+            double balance = a.getBalance();
+            double bal = balance - amount;
             a.setBalance(bal);
             
-            int balance2 = b.getBalance();
-            int bal2 = balance2 + amount;
+            double balance2 = b.getBalance();
+            double bal2 = balance2 + amount;
             b.setBalance(bal2);
             
             
             Date date = new Date();
             Transaction tran1 = new Transaction();
+            tran1.setTransID(tran1.getTransID());
             tran1.setType("Transfer");
             tran1.setDate(date);
             tran1.setDescription("Transfer of " + amount + "");

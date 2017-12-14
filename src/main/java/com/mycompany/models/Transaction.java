@@ -28,11 +28,16 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int transID;
     private String type, card, description;
-    private int amount;
-    private int nBalance;
+    private double amount;
+    private double nBalance;
     private Date date;
+    
     @ManyToOne(cascade=CascadeType.ALL)
     private Account account;
+    
+    public Transaction(){
+        
+    }
     
     public Account getAccount()  
     {  
@@ -43,7 +48,7 @@ public class Transaction {
         this.account = account;  
     }  
 
-    public Transaction(int transID, String type, String card, String description, int amount, int nBalance, Date date) {
+    public Transaction(int transID, String type, String card, String description, double amount, double nBalance, Date date) {
         this.transID = transID;
         this.type = type;
         this.card = card;
@@ -60,10 +65,12 @@ public class Transaction {
     public void setTransID(int transID) {
         this.transID = transID;
     }
+    
+   
 
     public String getType() {
         return type;
-    }
+    } 
 
     public void setType(String type) {
         this.type = type;
@@ -85,19 +92,19 @@ public class Transaction {
         this.description = description;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public int getnBalance() {
+    public double getnBalance() {
         return nBalance;
     }
 
-    public void setnBalance(int nBalance) {
+    public void setnBalance(double nBalance) {
         this.nBalance = nBalance;
     }
 
@@ -108,6 +115,8 @@ public class Transaction {
     public void setDate(Date date) {
         this.date = date;
     }
+
+   
    
     
     
