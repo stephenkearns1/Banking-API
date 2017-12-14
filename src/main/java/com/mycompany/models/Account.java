@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -75,6 +76,7 @@ public class Account implements Serializable {
         customer = c;
     }
     
+    @XmlTransient
     public Customer getCustomer(){
         return customer;
     }

@@ -77,7 +77,7 @@ Path to get balance of account
 */    
 
 @GET
-@Path("/{accountId/balance}")
+@Path("/balance/{accountId}")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public Response getBalance(@PathParam("accountId") int id){
     Account account = service.getBalance(id);

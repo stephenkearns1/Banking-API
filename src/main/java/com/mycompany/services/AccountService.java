@@ -69,9 +69,7 @@ public class AccountService {
     This method retrieves the balance of a customer's account
     */
     public Account getBalance(int id){
-        
         Account a = (Account) presistance.Find(Account.class, id);
-        presistance.Close();
         return a;
        
     }

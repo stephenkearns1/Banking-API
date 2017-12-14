@@ -56,7 +56,7 @@ public class TestRoutes {
     }
 
     
-    @GET
+@GET
 @Path("/balance/{accountId}")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public Response getBalance(@PathParam("accountId") int id){
