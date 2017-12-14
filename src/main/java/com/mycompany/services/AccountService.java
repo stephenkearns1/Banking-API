@@ -99,6 +99,12 @@ public class AccountService {
          */   
        return exists;
         }
+     
+     
+     public List<Account> getAccounts(int id){
+        Customer cust = (Customer) presistance.Find(Customer.class, id);
+        return cust.getAccounts();   
+    }
         
         
     

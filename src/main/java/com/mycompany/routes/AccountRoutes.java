@@ -7,6 +7,7 @@ package com.mycompany.routes;
 import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.services.AccountService;
 import com.mycompany.models.Account;
+import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,7 +20,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author barry
+ * @author barry, Stephen
  */
 
 
@@ -52,7 +53,7 @@ Path to get account details
 
 @GET
 @Path("/{accountId}")
- @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public Response getAccount(@PathParam("accountId") int id){
     Account account = service.getAccount(id);
     if(account != null){
@@ -102,5 +103,13 @@ public Response getBalance(@PathParam("accountId") int id){
         }
         
         return Response.status(Response.Status.NOT_FOUND).entity("Not found").build();
-    }   
+    } 
+    
+    
+    @GET
+    @Path("/{cust_id}/list")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> getAccounts(@PathParam("cust_id") int cust_id){
+        return service.getAccounts(cust_id);
+    }
 }

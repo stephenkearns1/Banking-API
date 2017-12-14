@@ -8,6 +8,7 @@ package com.mycompany.routes;
 import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.models.Account;
 import com.mycompany.services.AccountService;
+import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -81,6 +82,11 @@ public Response getBalance(@PathParam("accountId") int id){
     }   
 
 
-
+    @GET
+    @Path("/{cust_id}/list")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Account> getAccounts(@PathParam("cust_id") int cust_id){
+        return service.getAccounts(cust_id);
+    }
 
 }
