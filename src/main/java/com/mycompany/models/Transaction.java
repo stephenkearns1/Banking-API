@@ -6,10 +6,12 @@
 package com.mycompany.models;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,20 +27,32 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int transID;
-    private String transType;
+    private String type, card, description;
     private int amount;
+    private int nBalance;
     private Date date;
-    private int accountID;
-
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Account account;
     
-    public Transaction(int transID, String transType, int amount, Date date, int accountID) {
+    public Account getAccount()  
+    {  
+        return account;  
+    }  
+    public void setAccount(Account account)  
+    {  
+        this.account = account;  
+    }  
+
+    public Transaction(int transID, String type, String card, String description, int amount, int nBalance, Date date) {
         this.transID = transID;
-        this.transType = transType;
+        this.type = type;
+        this.card = card;
+        this.description = description;
         this.amount = amount;
+        this.nBalance = nBalance;
         this.date = date;
-        this.accountID = accountID;
-        
     }
+
     public int getTransID() {
         return transID;
     }
@@ -47,12 +61,28 @@ public class Transaction {
         this.transID = transID;
     }
 
-    public String getTransType() {
-        return transType;
+    public String getType() {
+        return type;
     }
 
-    public void setTransType(String transType) {
-        this.transType = transType;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCard() {
+        return card;
+    }
+
+    public void setCard(String card) {
+        this.card = card;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getAmount() {
@@ -63,6 +93,14 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public int getnBalance() {
+        return nBalance;
+    }
+
+    public void setnBalance(int nBalance) {
+        this.nBalance = nBalance;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -70,13 +108,8 @@ public class Transaction {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public int getAccountID() {
-        return accountID;
-    }
-
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
-
+   
+    
+    
+    
 }
