@@ -6,6 +6,7 @@
 package com.mycompany.services;
 
 import com.mycompany.models.Account;
+import com.mycompany.models.Customer;
 import com.mycompany.storage.DBPresistance;
 import java.util.List;
 
@@ -39,31 +40,36 @@ public class AccountService {
         return account;
     } */
     
-    public String CreateAccount(Account a){
-        if(!AccountAlreadyExists(a)){
-             //Acquire a connection, even tho a new instance will be created on each request 
-             presistance.OpenEntityManagerInstance();
+    public String CreateAccount(int  cust_id){
+        //if(!AccountAlreadyExists(a)){
+             //Acquire a connection, even tho a new instance will be created on each request
+             Customer customer = (Customer) presistance.Find(Customer.class, cust_id);
+             Account acc = new Account();
+             acc.setBalance(0.00);
+             acc.setCustomer(customer);
+             
+             customer.addAccount(acc);
+             
              presistance.Begin();
-             presistance.Presist(a);
+             presistance.Presist(acc);
+             presistance.Presist(customer);
              presistance.Commit();
 
              /* Close the connection unless, pooling is implemented */
              presistance.Close();
              return "Account Created";
       
-        }
-        else {
-            return "Account already exists";
-        }
+        //}
+        //else {
+        //    return "Account already exists";
+        // }
     }
         
     /*
     This method retrieves the balance of a customer's account
     */
     public Account getBalance(int id){
-        
         Account a = (Account) presistance.Find(Account.class, id);
-        presistance.Close();
         return a;
        
     }
@@ -93,6 +99,12 @@ public class AccountService {
          */   
        return exists;
         }
+     
+     
+     public List<Account> getAccounts(int id){
+        Customer cust = (Customer) presistance.Find(Customer.class, id);
+        return cust.getAccounts();   
+    }
         
         
     

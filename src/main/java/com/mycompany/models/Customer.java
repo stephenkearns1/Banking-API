@@ -2,7 +2,9 @@ package com.mycompany.models;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,8 @@ private int cust_id;
 private String fname,sname,email,address,password,securityQ,securityAns;
 private int pin;
 
-@OneToMany(targetEntity=Account.class )
+
+@OneToMany(targetEntity = Account.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
 private List<Account> accounts;
 
     public Customer() {
@@ -134,6 +137,10 @@ private List<Account> accounts;
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+    
+    public void addAccount(Account acc){
+        accounts.add(acc);
     }
     
   
