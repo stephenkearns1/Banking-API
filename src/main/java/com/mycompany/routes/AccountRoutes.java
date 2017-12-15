@@ -128,7 +128,7 @@ public Response getBalance(@PathParam("accountId") int id){
             @PathParam("accountId") int id1,
             @PathParam("cardNum") String id2,
             @PathParam("amount") double amount) {
-        Transaction trans = service.Lodgement(id1, id2, amount);
+        String trans = service.Lodgement(id1, id2, amount);
         if(trans != null){
     return Response.status(Response.Status.OK).entity(trans).build();
         }else{
@@ -147,7 +147,7 @@ public Response getBalance(@PathParam("accountId") int id){
             @PathParam("accountId") int id1,
             @PathParam("cardNum") String id2,
             @PathParam("amount") double amount) {
-        Transaction trans = service.Withdraw(id1, id2, amount);
+        String trans = service.Withdraw(id1, id2, amount);
         if(trans != null){
     return Response.status(Response.Status.OK).entity(trans).build();
         }else{

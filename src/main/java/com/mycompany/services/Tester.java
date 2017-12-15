@@ -8,6 +8,7 @@ package com.mycompany.services;
 import com.mycompany.models.Account;
 import com.mycompany.models.Transaction;
 import com.mycompany.storage.DBPresistance;
+import java.util.Date;
 
 /**
  *
@@ -16,78 +17,65 @@ import com.mycompany.storage.DBPresistance;
 public class Tester {
 
     public static void main(String[] args) {
-        Tester.Lodgement(1, "1232", 50);
-        Tester.Withdrawal(100, "1234", 50);
+        Tester.Transfer(1, 2, 500);
     }
 
-    public static Transaction Lodgement(int accountId, String cardNum, double amount) {
+    public static String Transfer(int accountId, int accountTo, double amount) {
         DBPresistance presistance = new DBPresistance();
 
-        Account acc = new Account();
+        AccountService service;
+        service = new AccountService();
         
-        double originalBal = 0.0, newBal = 0.0;
-            Transaction trans = new Transaction();
-            presistance.Begin();
-            presistance.Presist(acc);
-            trans.setBalance(acc.getBalance());
-            trans.setCardNum(cardNum);
-            trans.setAmount(amount);
-            originalBal = trans.getBalance();
-            newBal = originalBal + amount;
-            trans.setNewBalance(newBal);
-            trans.setAccount(acc);
-            acc.AddTrans(trans);
-
-            presistance.Presist(acc);
-            presistance.Presist(trans);
-            presistance.Commit();
-            
-            presistance.refresh(acc);
-            for (Transaction object : acc.getTransactions()) {
-                System.out.println(object);
-            
+        Account accf = (Account) presistance.Find(Account.class, accountId);
+        Account accTo = (Account) presistance.Find(Account.class, accountTo);
+        if(accf == null){
+            return "Account not found";
         }
-                        presistance.Close();
+        else if( accTo == null){
+            return "The account you are transfering to has not be found";
+        }
+        else{
+            
+            double originalBal = 0.0, newBal = 0.0;
+             Transaction trans = new Transaction();
 
-
-            return trans;
-        
-    }
-    
-     public static Transaction Withdrawal(int accountId, String cardNum, double amount) {
-        DBPresistance presistance = new DBPresistance();
-
-        Account acc = new Account();
-        
-        double originalBal = 0.0, newBal = 0.0;
-            Transaction trans = new Transaction();
+             
             presistance.Begin();
-            presistance.Presist(acc);
-            trans.setBalance(acc.getBalance());
-            trans.setCardNum(cardNum);
+            presistance.Presist(accf);
+            presistance.Presist(accTo);
+            trans.setBalance(accf.getBalance());
+            trans.setCardNum("111");
             trans.setAmount(amount);
+            trans.setType("Withdraw");
+            trans.setDate(new Date());
             originalBal = trans.getBalance();
             newBal = originalBal - amount;
             trans.setNewBalance(newBal);
-            trans.setAccount(acc);
-            acc.setBalance(newBal);
-            acc.AddTrans(trans);
-
-            presistance.Presist(acc);
-            presistance.Presist(trans);
+            trans.setAccount(accTo);
+            accf.setBalance(newBal);
+            accf.AddTrans(trans);
+            
+            
+            trans.setBalance(accTo.getBalance());
+            trans.setCardNum("1111");
+            trans.setAmount(amount);
+            trans.setType("Lodgement");
+            trans.setDate(new Date());
+            originalBal = trans.getBalance();
+            newBal = originalBal + amount;
+            trans.setNewBalance(newBal);
+            trans.setAccount(accTo);
+            accTo.AddTrans(trans);
+            accTo.setBalance(newBal);
+            
+            presistance.Presist(accTo);
+            presistance.Presist(accf);
             presistance.Commit();
-            
-            presistance.refresh(acc);
-            for (Transaction object : acc.getTransactions()) {
-                System.out.println(object);
-            
-            }
-            
+            presistance.refresh(accTo);
+            presistance.refresh(accf);
             presistance.Close();
-
-
-            return trans;
+        }
         
+        return "";
     }
-
 }
