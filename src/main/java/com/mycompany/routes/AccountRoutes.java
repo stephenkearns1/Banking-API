@@ -123,7 +123,7 @@ public Response getBalance(@PathParam("accountId") int id){
     @Path("/lodgement/{accountId}/{cardNum}/{amount}")
     public Response Lodgement(
             @PathParam("accountId") int id1,
-            @PathParam("cardNum") int id2,
+            @PathParam("cardNum") String id2,
             @PathParam("amount") int amount) {
     return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
      
