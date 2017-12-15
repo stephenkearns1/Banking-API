@@ -28,24 +28,24 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table
 @XmlRootElement
 public class Account implements Serializable {
-   @Id 
+   @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private int accountId;
    private int sortCode;
    private double balance;
-   
-   
+
+
    @ManyToOne(fetch=FetchType.EAGER)
    @JoinColumn(name="cust_id")
    private Customer customer;
-   
-   @OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
+
+   @OneToMany(targetEntity = Transaction.class, mappedBy = "account")
    private List<Transaction> transactions;
-   
+
    public Account() {
-   
+
    }
-   
+
    public Account(int sortCode, int accountId, double balance) {
         this.sortCode = sortCode;
         this.accountId = accountId;
@@ -63,7 +63,7 @@ public class Account implements Serializable {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-   
+
 
     public int getSortCode() {
         return sortCode;
@@ -76,7 +76,7 @@ public class Account implements Serializable {
     public double getBalance() {
         return balance;
     }
-   
+
     public void setCustomer(Customer c){
         customer = c;
     }
@@ -92,16 +92,16 @@ public class Account implements Serializable {
     public int getAccountId() {
         return accountId;
     }
-    
-    
+
+
     @XmlTransient
     public Customer getCustomer(){
         return customer;
     }
-    
-   
+
+
     public void AddTrans(Transaction trans){
      transactions.add(trans);
     }
-    
+
 }
