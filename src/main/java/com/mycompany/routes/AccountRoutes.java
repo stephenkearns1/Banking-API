@@ -120,10 +120,10 @@ public Response getBalance(@PathParam("accountId") int id){
     @GET
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Path("/lodgement/{accountId}/{card}/{amount}")
+    @Path("/lodgement/{accountId}/{cardNum}/{amount}")
     public Response Lodgement(
             @PathParam("accountId") int id1,
-            @PathParam("card") int id2,
+            @PathParam("cardNum") int id2,
             @PathParam("amount") int amount) {
     return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
      
@@ -134,10 +134,10 @@ public Response getBalance(@PathParam("accountId") int id){
     @GET
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Path("/withdrawal/{accountId}/{card}/{amount}")
+    @Path("/withdrawal/{accountId}/{cardNum}/{amount}")
     public Response Withdrawal(
             @PathParam("accountId") int id1,
-            @PathParam("card") int id2,
+            @PathParam("cardNum") int id2,
             @PathParam("amount") int amount) {
         
     return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
