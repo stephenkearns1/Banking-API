@@ -33,6 +33,7 @@ public class Transaction {
     private double newBalance;
     private Date date;
     private String cardNum;
+    private int accountTo;
     
     @ManyToOne(cascade=CascadeType.ALL)
     private Account account;
@@ -82,6 +83,10 @@ public class Transaction {
         this.cardNum = cardNum;
     }
 
+    public void setAccountTo(int accountTo) {
+        this.accountTo = accountTo;
+    }
+
     
     public void setAccount(Account account) {
         this.account = account;
@@ -115,7 +120,10 @@ public class Transaction {
     public String getCardNum() {
         return cardNum;
     }
-    
+
+    public int getAccountTo() {
+        return accountTo;
+    }
     
 
     public Account getAccount() {

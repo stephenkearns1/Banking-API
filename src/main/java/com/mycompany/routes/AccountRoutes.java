@@ -111,5 +111,19 @@ public Response getBalance(@PathParam("accountId") int id){
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> getAccounts(@PathParam("cust_id") int cust_id){
         return service.getAccounts(cust_id);
+ }
+    
+    //Lodgement
+    
+    @GET
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("/lodgement/{accountId}/{cardNum}/{amount}")
+    public Response Lodgement(
+            @PathParam("accountId") int id1,
+            @PathParam("cardNum") String id2,
+            @PathParam("amount") int amount) {
+    return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+     
     }
 }
