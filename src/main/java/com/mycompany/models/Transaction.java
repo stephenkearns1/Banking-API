@@ -6,10 +6,12 @@
 package com.mycompany.models;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -24,59 +26,100 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int transID;
-    private String transType;
-    private int amount;
+    private int Id;
+    private String type;
+    private double amount;
+    private double balance;
+    private double newBalance;
     private Date date;
-    private int accountID;
-
+    private String cardNum;
     
-    public Transaction(int transID, String transType, int amount, Date date, int accountID) {
-        this.transID = transID;
-        this.transType = transType;
-        this.amount = amount;
-        this.date = date;
-        this.accountID = accountID;
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Account account;
+    
+    public Transaction(){
         
     }
-    public int getTransID() {
-        return transID;
+
+    public Transaction(int Id, String type, double amount, double balance, double newBalance, Date date, String cardNum, Account account) {
+        this.Id = Id;
+        this.type = type;
+        this.amount = amount;
+        this.balance = balance;
+        this.newBalance = newBalance;
+        this.date = date;
+        this.cardNum = cardNum;
+        this.account = account;
     }
 
-    public void setTransID(int transID) {
-        this.transID = transID;
+    
+
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
-    public String getTransType() {
-        return transType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setTransType(String transType) {
-        this.transType = transType;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Date getDate() {
-        return date;
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setNewBalance(double newBalance) {
+        this.newBalance = newBalance;
     }
 
     public void setDate(Date date) {
         this.date = date;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+    
+    
+    public int getId() {
+        return Id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getNewBalance() {
+        return newBalance;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getCardNum() {
+        return cardNum;
+    }
+    
+    
+
+    public Account getAccount() {
+        return account;
     }
 
 }

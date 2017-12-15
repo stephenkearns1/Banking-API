@@ -7,6 +7,7 @@ package com.mycompany.models;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,6 +38,9 @@ public class Account implements Serializable {
    @ManyToOne(fetch=FetchType.EAGER)
    @JoinColumn(name="cust_id")
    private Customer customer;
+   
+   @OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
+   private List<Transaction> transactions;
    
    public Account() {
    
@@ -75,11 +80,28 @@ public class Account implements Serializable {
     public void setCustomer(Customer c){
         customer = c;
     }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+    
     
     @XmlTransient
     public Customer getCustomer(){
         return customer;
     }
     
+   
+    public void AddTrans(Transaction trans){
+     transactions.add(trans);
+    }
     
 }

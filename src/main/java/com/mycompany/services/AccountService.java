@@ -7,6 +7,7 @@ package com.mycompany.services;
 
 import com.mycompany.models.Account;
 import com.mycompany.models.Customer;
+import com.mycompany.models.Transaction;
 import com.mycompany.storage.DBPresistance;
 import java.util.List;
 
@@ -106,7 +107,32 @@ public class AccountService {
         return cust.getAccounts();   
     }
         
-    /* Transfer methods go here */    
+    /* Transfer methods go here */
+    
+    public Transaction Lodgement(int accountId,String cardNum, double amount){
+        /* 
+        Find the account, 
+        add the card number to the account add the amount to the balance
+        Return the trans 
+        */
+     Account acc = (Account) presistance.Find(Account.class, accountId);
+     double originalBal = 0.0, newBal = 0.0;
+     if(acc != null){
+         Transaction trans = new Transaction();
+         presistance.Begin();
+         trans.setBalance(acc.getBalance());
+         trans.setCardNum(cardNum);
+         trans.setAmount(amount);
+         originalBal = trans.getBalance();
+         newBal = originalBal + amount;
+         trans.setNewBalance(newBal);
+         trans.setAccount(acc);
+         presistance.Presist(trans);
+         presistance.Commit();
+         
+     }
+    }
+    
     
     
 }
