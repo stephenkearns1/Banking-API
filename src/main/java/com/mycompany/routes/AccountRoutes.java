@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -163,7 +165,7 @@ public Response getBalance(@PathParam("accountId") int id){
             @PathParam("accountFrom") int id1,
             @PathParam("accountTo") String id2,
             @PathParam("amount") double amount) {
-      Transaction trans = service.Transfer(id1, id1, amount);
+      String trans = service.Transfer(id1, id1, amount);
         if(trans != null){
     return Response.status(Response.Status.OK).entity(trans).build();
         }else{
