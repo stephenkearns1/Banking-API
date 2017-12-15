@@ -127,11 +127,81 @@ public class AccountService {
          newBal = originalBal + amount;
          trans.setNewBalance(newBal);
          trans.setAccount(acc);
+         acc.AddTrans(trans);
+         
+         presistance.Presist(acc);
          presistance.Presist(trans);
          presistance.Commit();
+         presistance.Close();
          
+         return trans;
      }
+     
+     return null;
     }
+    
+    public Transaction Withdraw(int accountId,String cardNum, double amount){
+        /* 
+        Find the account, 
+        add the card number to the account add the amount to the balance
+        Return the trans 
+        */
+     Account acc = (Account) presistance.Find(Account.class, accountId);
+     double originalBal = 0.0, newBal = 0.0;
+     if(acc != null){
+         Transaction trans = new Transaction();
+         presistance.Begin();
+         trans.setBalance(acc.getBalance());
+         trans.setCardNum(cardNum);
+         trans.setAmount(amount);
+         originalBal = trans.getBalance();
+         newBal = originalBal - amount;
+         trans.setNewBalance(newBal);
+         trans.setAccount(acc);
+         acc.AddTrans(trans);
+         
+         presistance.Presist(acc);
+         presistance.Presist(trans);
+         presistance.Commit();
+         presistance.Close();
+         
+         return trans;
+     }
+     
+     return null;
+    }
+    
+     public Transaction Transfer(int accountId, int accountTo, double amount){
+        /* 
+        Find the account, 
+        add the card number to the account add the amount to the balance
+        Return the trans 
+        */
+     Account acc = (Account) presistance.Find(Account.class, accountId);
+     double originalBal = 0.0, newBal = 0.0;
+     if(acc != null){
+         Transaction trans = new Transaction();
+         presistance.Begin();
+         trans.setBalance(acc.getBalance());
+         trans.setAccountTo(accountTo);
+         trans.setAmount(amount);
+         originalBal = trans.getBalance();
+         newBal = originalBal - amount;
+         trans.setNewBalance(newBal);
+         trans.setAccount(acc);
+         acc.AddTrans(trans);
+         
+         presistance.Presist(acc);
+         presistance.Presist(trans);
+         presistance.Commit();
+         presistance.Close();
+         
+         return trans;
+     }
+     
+     return null;
+    }
+    
     
     
     
