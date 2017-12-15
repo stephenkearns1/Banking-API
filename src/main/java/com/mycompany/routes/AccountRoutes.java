@@ -7,6 +7,7 @@ package com.mycompany.routes;
 import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.services.AccountService;
 import com.mycompany.models.Account;
+import com.mycompany.models.Transaction;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -123,9 +124,14 @@ public Response getBalance(@PathParam("accountId") int id){
     @Path("/lodgement/{accountId}/{cardNum}/{amount}")
     public Response Lodgement(
             @PathParam("accountId") int id1,
-            @PathParam("cardNum") int id2,
-            @PathParam("amount") int amount) {
-    return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+            @PathParam("cardNum") String id2,
+            @PathParam("amount") double amount) {
+        Transaction trans = service.Lodgement(id1, id2, amount);
+        if(trans != null){
+    return Response.status(Response.Status.OK).entity(trans).build();
+        }else{
+            return Response.status(Response.Status.BAD_REQUEST).entity("Bad Request").build();
+        }
      
     }
     
@@ -137,10 +143,14 @@ public Response getBalance(@PathParam("accountId") int id){
     @Path("/withdrawal/{accountId}/{cardNum}/{amount}")
     public Response Withdrawal(
             @PathParam("accountId") int id1,
-            @PathParam("cardNum") int id2,
-            @PathParam("amount") int amount) {
-        
-    return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+            @PathParam("cardNum") String id2,
+            @PathParam("amount") double amount) {
+        Transaction trans = service.Withdraw(id1, id2, amount);
+        if(trans != null){
+    return Response.status(Response.Status.OK).entity(trans).build();
+        }else{
+            return Response.status(Response.Status.BAD_REQUEST).entity("Bad Request!").build();
+        }
 }
     
       //Transer
@@ -151,9 +161,13 @@ public Response getBalance(@PathParam("accountId") int id){
     @Path("/transfer/{accountFrom}/{accountTo}/{amount}")
     public Response Transfer(
             @PathParam("accountFrom") int id1,
-            @PathParam("accountTo") int id2,
-            @PathParam("amount") int amount) {
-      
-     return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+            @PathParam("accountTo") String id2,
+            @PathParam("amount") double amount) {
+      Transaction trans = service.Transfer(id1, id1, amount);
+        if(trans != null){
+    return Response.status(Response.Status.OK).entity(trans).build();
+        }else{
+            return Response.status(Response.Status.BAD_REQUEST).entity("Bad Request").build();
+        }
 }
 }

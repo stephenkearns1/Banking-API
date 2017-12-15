@@ -1,5 +1,6 @@
 package com.mycompany.storage;
 
+import com.mycompany.models.Account;
 import com.mycompany.models.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -84,6 +85,10 @@ public class DBPresistance {
     
     public CriteriaBuilder GetCriteriaBuilder(){
         return entityManager.getCriteriaBuilder();
+    }
+
+    public void refresh(Object acc) {
+        entityManager.refresh(acc);
     }
     
     

@@ -130,4 +130,11 @@ public class Transaction {
         return account;
     }
 
+    @Override
+    public String toString() {
+        return "Transaction{" + "Id=" + Id + ", type=" + type + ", amount=" + amount + ", balance=" + balance + ", newBalance=" + newBalance + ", date=" + date + ", cardNum=" + cardNum + ", accountTo=" + accountTo + '}';
+    }
+    
+    
+
 }

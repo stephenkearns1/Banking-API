@@ -6,6 +6,7 @@
 package com.mycompany.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,10 +44,13 @@ public class Account implements Serializable {
    private List<Transaction> transactions;
 
    public Account() {
+       transactions = new ArrayList<>();
 
    }
 
    public Account(int sortCode, int accountId, double balance) {
+              transactions = new ArrayList<>();
+
         this.sortCode = sortCode;
         this.accountId = accountId;
         this.balance = balance;
