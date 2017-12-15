@@ -8,9 +8,11 @@ import com.mycompany.exceptions.NotFoundException;
 import com.mycompany.services.AccountService;
 import com.mycompany.models.Account;
 import java.util.List;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -111,5 +113,47 @@ public Response getBalance(@PathParam("accountId") int id){
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Account> getAccounts(@PathParam("cust_id") int cust_id){
         return service.getAccounts(cust_id);
+ }
+    
+    //Lodgement
+    
+    @GET
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("/lodgement/{accountId}/{card}/{amount}")
+    public Response Lodgement(
+            @PathParam("accountId") int id1,
+            @PathParam("card") int id2,
+            @PathParam("amount") int amount) {
+    return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+     
     }
+    
+     //Withdrawal
+    
+    @GET
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("/withdrawal/{accountId}/{card}/{amount}")
+    public Response Withdrawal(
+            @PathParam("accountId") int id1,
+            @PathParam("card") int id2,
+            @PathParam("amount") int amount) {
+        
+    return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+}
+    
+      //Transer
+    
+    @GET
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Path("/transfer/{accountFrom}/{accountTo}/{amount}")
+    public Response Transfer(
+            @PathParam("accountFrom") int id1,
+            @PathParam("accountTo") int id2,
+            @PathParam("amount") int amount) {
+      
+     return Response.status(Response.Status.OK).entity("Danny Gil is a nerd").build();
+}
 }
