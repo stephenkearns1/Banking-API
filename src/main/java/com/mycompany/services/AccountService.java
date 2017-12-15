@@ -9,6 +9,7 @@ import com.mycompany.models.Account;
 import com.mycompany.models.Customer;
 import com.mycompany.models.Transaction;
 import com.mycompany.storage.DBPresistance;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -149,58 +150,50 @@ public class AccountService {
      Account acc = (Account) presistance.Find(Account.class, accountId);
      double originalBal = 0.0, newBal = 0.0;
      if(acc != null){
-         Transaction trans = new Transaction();
-         presistance.Begin();
-         trans.setBalance(acc.getBalance());
-         trans.setCardNum(cardNum);
-         trans.setAmount(amount);
-         originalBal = trans.getBalance();
-         newBal = originalBal - amount;
-         trans.setNewBalance(newBal);
-         trans.setAccount(acc);
-         acc.AddTrans(trans);
-         
-         presistance.Presist(acc);
-         presistance.Presist(trans);
-         presistance.Commit();
-         presistance.Close();
-         
-         return trans;
-     }
+            Transaction trans = new Transaction();
+            presistance.Begin();
+            presistance.Presist(acc);
+            trans.setBalance(acc.getBalance());
+            trans.setCardNum(cardNum);
+            trans.setAmount(amount);
+            originalBal = trans.getBalance();
+            newBal = originalBal - amount;
+            trans.setNewBalance(newBal);
+            trans.setAccount(acc);
+            acc.setBalance(newBal);
+            acc.AddTrans(trans);
+
+            presistance.Presist(acc);
+            presistance.Presist(trans);
+            presistance.Commit();
+            presistance.refresh(acc);
+            presistance.Close();
+
+
+            return trans;
+        
+        }
      
      return null;
     }
     
-     public Transaction Transfer(int accountId, int accountTo, double amount){
-        /* 
-        Find the account, 
-        add the card number to the account add the amount to the balance
-        Return the trans 
-        */
-     Account acc = (Account) presistance.Find(Account.class, accountId);
-     double originalBal = 0.0, newBal = 0.0;
-     if(acc != null){
-         Transaction trans = new Transaction();
-         presistance.Begin();
-         trans.setBalance(acc.getBalance());
-         trans.setAccountTo(accountTo);
-         trans.setAmount(amount);
-         originalBal = trans.getBalance();
-         newBal = originalBal - amount;
-         trans.setNewBalance(newBal);
-         trans.setAccount(acc);
-         acc.AddTrans(trans);
-         
-         presistance.Presist(acc);
-         presistance.Presist(trans);
-         presistance.Commit();
-         presistance.Close();
-         
-         return trans;
+     public String Transfer(int accountId, int accountTo, double amount){
+        Account acc = (Account) presistance.Find(Account.class, accountId);
+        Account accTo = (Account) presistance.Find(Account.class, accountTo);
+        if(acc == null){
+            return "Account not found";
+        }
+        else if( accTo == null){
+            return "The account you are transfering to has not be found";
+        }
+        else{
+            String cardNum = "0";
+            Withdraw(accountId,cardNum, amount);
+            Lodgement(accountTo, cardNum, amount);
+            return "Transfer successful";
+        }
+        
      }
-     
-     return null;
-    }
      
      /*
       

@@ -1,6 +1,7 @@
 package com.mycompany.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,9 +39,11 @@ private int pin;
 private List<Account> accounts;
 
     public Customer() {
+        accounts = new ArrayList<>();
     }
 
     public Customer(String Fname, String Sname, String email, String address, String password, String securityQ, String securityAns, int pin) {
+        accounts = new ArrayList<>();
         this.fname = Fname;
         this.sname = Sname;
         this.email = email;
